@@ -1,0 +1,5 @@
+routes = [
+    "/users",
+    "/products",
+    "/orders",
+]
