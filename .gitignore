@@ -2,3 +2,4 @@ venv/
 _pycache__/
 *.pyc
 .env
+PROJECT_GUIDE.txt
