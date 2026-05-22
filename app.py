@@ -9,7 +9,16 @@ A Flask-based REST API demonstrating backend fundamentals:
 
 from flask import Flask, jsonify, request
 from validators import validate_user, validate_product
-from db import users_db, products_db
+from db import (
+    users_db,
+    products_db,
+    users_index,
+    products_index,
+    add_user,
+    delete_user_by_id,
+    add_product,
+    delete_product_by_id,
+)
 
 app = Flask(__name__)
 
@@ -44,7 +53,7 @@ def get_users():
 @app.route('/api/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     """Return a single user by ID"""
-    user = next((u for u in users_db if u['id'] == user_id), None)
+    user = users_index.get(user_id)
     if not user:
         return jsonify({"success": False, "error": "User not found"}), 404
     return jsonify({"success": True, "user": user})
@@ -64,14 +73,14 @@ def create_user():
         "email": data['email'].strip().lower(),
         "role": data.get('role', 'user')
     }
-    users_db.append(new_user)
+    add_user(new_user)
     return jsonify({"success": True, "message": "User created", "user": new_user}), 201
 
 
 @app.route('/api/users/<int:user_id>', methods=['PUT'])
 def update_user(user_id):
     """Update an existing user"""
-    user = next((u for u in users_db if u['id'] == user_id), None)
+    user = users_index.get(user_id)
     if not user:
         return jsonify({"success": False, "error": "User not found"}), 404
 
@@ -89,12 +98,11 @@ def update_user(user_id):
 @app.route('/api/users/<int:user_id>', methods=['DELETE'])
 def delete_user(user_id):
     """Delete a user"""
-    global users_db
-    user = next((u for u in users_db if u['id'] == user_id), None)
+    user = users_index.get(user_id)
     if not user:
         return jsonify({"success": False, "error": "User not found"}), 404
 
-    users_db = [u for u in users_db if u['id'] != user_id]
+    delete_user_by_id(user_id)
     return jsonify({"success": True, "message": f"User {user_id} deleted"})
 
 
@@ -112,7 +120,7 @@ def get_products():
 @app.route('/api/products/<int:product_id>', methods=['GET'])
 def get_product(product_id):
     """Return a single product by ID"""
-    product = next((p for p in products_db if p['id'] == product_id), None)
+    product = products_index.get(product_id)
     if not product:
         return jsonify({"success": False, "error": "Product not found"}), 404
     return jsonify({"success": True, "product": product})
@@ -133,7 +141,7 @@ def create_product():
         "category": data.get('category', 'general'),
         "stock": int(data.get('stock', 0))
     }
-    products_db.append(new_product)
+    add_product(new_product)
     return jsonify({"success": True, "message": "Product created", "product": new_product}), 201
 
 
