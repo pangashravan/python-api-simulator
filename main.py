@@ -1,6 +1,5 @@
-from routes import routes
+def main():
+    print("API Simulator")
 
-print("Python API Simulator is running")
-
-for route in routes:
-    print(f"Endpoint Loaded: {route}")
+if __name__ == "__main__":
+    main()
