@@ -28,3 +28,4 @@ def validate_product(data):
     except (ValueError, TypeError):
         return "Field 'price' must be a valid number"
     return None
+
