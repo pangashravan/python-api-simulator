@@ -3,6 +3,7 @@
 CLI-based REST API simulator.
 
 ## Features
+
 - Simulated GET/POST requests
 - JSON response handling
 - Dynamic routing
@@ -10,6 +11,7 @@ CLI-based REST API simulator.
 - Automated testing
 
 ## Folder Design
+
 simulator/
 handlers/
 tests/
