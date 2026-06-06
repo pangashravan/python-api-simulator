@@ -15,6 +15,7 @@ CLI-based REST API simulator.
 simulator/
 handlers/
 tests/
+
 ## Portfolio Value
 
 This repo demonstrates:
