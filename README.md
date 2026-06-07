@@ -8,7 +8,6 @@ CLI-based REST API simulator.
 - Dynamic routing
 - Error handling
 - Automated testing
-
 ## Folder Design
 
 simulator/
