@@ -1,5 +1,4 @@
 # Python API Simulator
-
 CLI-based REST API simulator.
 
 ## Features
