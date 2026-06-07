@@ -18,6 +18,7 @@ tests/
 
 ## Portfolio Value
 This repo demonstrates:
+
 - modular Python architecture
 - API fundamentals
 - testing discipline
